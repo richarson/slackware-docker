@@ -1,0 +1,21 @@
+ARG FROM_IMAGE="richis/slackware-min:14.2"
+FROM "${FROM_IMAGE}"
+ARG DEV_UID=1000
+ARG DEV_GID=1000
+ARG DEV_USER=richis
+ARG REPO="http://mirrors.us.kernel.org/slackware/slackware-14.2/"
+RUN echo "${REPO}" > /etc/slackpkg/mirrors
+RUN yes y | \
+    linux32 slackpkg update && \
+    linux32 slackpkg install-new && \
+    linux32 slackpkg upgrade-all -default_answer=yes -batch=yes && \
+    linux32 slackpkg install -default_answer=yes -batch=yes a/* ap/* d/* e/* kde/* l/* n/* t/* tcl/* x/* xap/* xfce/* y/*
+
+RUN groupadd -g "${DEV_GID}" "${DEV_USER}" ; \
+    useradd -m -u "${DEV_UID}" -g "${DEV_GID}" -G wheel "${DEV_USER}" && \
+    sed -ri 's/^# (%wheel.*NOPASSWD.*)$/\1/' /etc/sudoers
+USER "${DEV_USER}"
+ENV HOME /home/"${DEV_USER}"
+WORKDIR /home/"${DEV_USER}"
+
+CMD bash -l
