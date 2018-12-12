@@ -9,6 +9,14 @@ Overview
 Modifications to Vincent Batts' (https://github.com/vbatts/slackware-docker)
 dockerfiles to create base and full slackware images, both 32 and 64 bits.
 
+Consider these scripts alpha/beta status, I plan to improve them but I make no promises :)
+
+- mkimage-slackware32.sh: script to create a minimal 32 bits slackware image from scratch
+- mkimage-slackware64.sh: script to create a minimal 64 bits slackware image from scratch
+- Dockerfile-32full: builds a full 32 bits slackware image from the image created by mkimage-slackware32.sh
+- Dockerfile-64full: builds a full 64 bits slackware image from the image created by mkimage-slackware64.sh
+- get_paths.rb: original script from vbatts, unmodified.
+
 Contributing
 ============
 please hack on this and send feedback!
