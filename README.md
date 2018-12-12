@@ -1,47 +1,13 @@
 slackware-docker
 ===============
 
-build scripts for a slackware docker image
+build scripts for full slackware docker images
 
 Overview
 ========
 
-The Dockerfile is incomplete so far, since it expects a base image to be used.
-It would be possible and understandable to use the 'busybox' image, and build
-from there, but also to have a mkimage-slackware.sh to build the base image.
-
-build
-=====
-
-Currently, using the installer bootstrap, the mkimage-slackware can create an
-ultra-minimal slackware filesystem. (does not even include pkgtools)
-
-	$> sudo docker -d &
-	$> make image
-
-Then you will be able to run:
-
-	$> sudo docker run -i -t $USER/slackware-base /bin/sh
-
-(This will be the environment to build out the Dockerfile from)
-(( see http://docs.docker.com/reference/builder/ for more info on that ))
-
-
-To build alternate versions of slackware, pass gnu-make the RELEASE variable, like:
-
-	$> make image RELEASE=slackware64-13.37 IMG_NAME=$HOME/my_slackware:13.37
-
-Index
-=====
-
-This is this build process used to be the base of 'vbatts/slackware' on the
-http://index.docker.io/
-
-Just running:
-
-	$> sudo docker run -i -t vbatts/slackware /bin/sh
-
-Will pull down this image for testing.
+Modifications to Vincent Batts' (https://github.com/vbatts/slackware-docker)
+dockerfiles to create base and full slackware images, both 32 and 64 bits.
 
 Contributing
 ============
@@ -54,7 +20,7 @@ Copyright (c) 2013, Vincent Batts <vbatts@hashbangbash.com>
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met: 
+modification, are permitted provided that the following conditions are met:
 
 1. Redistributions of source code must retain the above copyright notice, this
    list of conditions and the following disclaimer. 
